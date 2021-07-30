@@ -14,7 +14,7 @@ class TestCase(unittest.TestCase):
 
     def test_is_empty(self):
         self.assertEqual(self.stack.is_empty(), False)
-        for x in range(self.stack.__len__()):
+        for _ in range(self.stack.__len__()):
             self.stack.pop()
         self.assertEqual(self.stack.is_empty(), True)
 
