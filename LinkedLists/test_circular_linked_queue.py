@@ -1,3 +1,4 @@
+from typing import Deque
 import unittest
 from circular_linked_queue import CircularQueue
 
@@ -32,6 +33,22 @@ class TestCase(unittest.TestCase):
         self.assertEqual(self.queue.dequeue(), 3)
         with self.assertRaises(IndexError):
             self.queue.dequeue()
+
+    def test_first(self):
+        x = ['a', 'b', 'c', -1, 2, 3]
+        x.reverse()
+        for index, value in enumerate(x):
+            self.assertEqual(self.queue.first(), x[len(x)-index-1])
+            self.queue.dequeue()
+        with self.assertRaises(IndexError):
+            self.queue.first()
+
+    def test_rotate(self):
+        self.queue.rotate()
+        self.assertEqual(self.queue.first(), 'b')
+        self.queue.rotate(5)
+        self.assertEqual(self.queue.first(), 'a')
+
 
 if __name__ == '__main__':
     unittest.main()

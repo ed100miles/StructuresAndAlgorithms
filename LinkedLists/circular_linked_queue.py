@@ -48,12 +48,10 @@ class CircularQueue:
         if self.is_empty():
             raise IndexError('Queue is empty')
         head = self._tail._next
-        return head.value
+        return head._value
 
     def rotate(self, rotations=1):
         """Rotate front element to back of queue 'rotations' times"""
         if self._size > 0:
             for x in range(rotations):
                 self._tail = self._tail._next   # Old head becomes new tail
-
-
