@@ -51,7 +51,7 @@ class PositionalList(_DoublyLinkedBase):
             self._container = container
             self._node = node
 
-        def element(self):
+        def value(self):
             """ Return node value stored at this position"""
             return self._node._value
 
@@ -63,13 +63,13 @@ class PositionalList(_DoublyLinkedBase):
             """ Return True if other doesn't represent the same location"""
             return not (self == other)
 
-    # Utility methods:
+    # -------------- Utility methods: --------------
 
     def _validate(self, p):
         """ Return positions node or raise error if invalid """
         if not isinstance(p, self.Position):
             raise TypeError('p must be propper Position type')
-        if p._contianer is not self:
+        if p._container is not self:
             raise ValueError('p doesnt belowng to this container')
         if p._node._next is None:       # as with deprecated nodes
             raise ValueError('p is no longer valid')
@@ -81,5 +81,78 @@ class PositionalList(_DoublyLinkedBase):
             return None
         else:
             return self.Position(self, node)
-        
+
+    # ---------- Acessors: -------------------
+
+    def first(self):
+        """ Return the first Position in the list (or None if list empty)"""
+        return self._make_position(self._header._next)
+
+    def last(self):
+        """ Return the last Position in the list (or None if list empty)"""
+        return self._make_position(self._trailer._prev)
+
+    def before(self, p):
+        """ Return position before Position p, or None if p is first"""
+        node = self._validate(p)
+        return self._make_position(node._prev)
+
+    def after(self, p):
+        """ Return postion after Position p, or None if p is last"""
+        node = self._validate(p)
+        return self._make_position(node._next)
+
+    def __iter__(self):
+        """ Generate a forward iteration of the elements of the list"""
+        cursor = self.first()
+        while cursor is not None:
+            yield cursor.value()
+            cursor = self.after(cursor)
+
+    # -------------- Mutators: ----------------------------
+
+    # override inherited version to return Position not node:
+    def _insert_between(self, value, predecessor, successor):
+        """ Add element between exisiting nodes and return new Position"""
+        node = super()._insert_between(value, predecessor, successor)
+        return self._make_position(node)
+
+    def add_first(self, value):
+        """ Insert element with value at front of list and return new Position"""
+        return self._insert_between(value, self._header, self._header._next)
+
+    def add_last(self, value):
+        """ Insert element with value at end of list and return new Position"""
+        return self._insert_between(value, self._trailer._prev, self._trailer)
+
+    def add_before(self, p, value):
+        """ Insert element with value before Position p and return new Position"""
+        origional = self._validate(p)
+        return self._insert_between(value, origional._prev, origional)
+
+    def add_after(self, p, value):
+        """ Insert element with value after Position p and return new Position"""
+        origional = self._validate(p)
+        return self._insert_between(value, origional, origional._next)
+
+    def delete(self, p):
+        origional = self._validate(p)
+        return self._delete_node(origional)  #  inherited method returns value
+
+    def replace(self, p, value):
+        """ Replace the value at Position p with value, returns value formerly at Position p"""
+        origional = self._validate(p)
+        old_value = origional._value
+        origional._value = value
+        return old_value
+
+# list = PositionalList()
+
+# list.add_first('Cheese')
+# first = list.first()
+# print(list.first().value())
+
+# list.add_after(first, 'Wine')
+
+# print(list.last().value())
 
