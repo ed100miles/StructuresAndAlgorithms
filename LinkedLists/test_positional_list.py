@@ -37,6 +37,6 @@ class TestCase(unittest.TestCase):
         self.p_list.replace(self.p_list.first(), 'z')
         self.assertEqual(self.p_list.first().value(), 'z')
 
-
+    
 if __name__ == '__main__':
     unittest.main()
