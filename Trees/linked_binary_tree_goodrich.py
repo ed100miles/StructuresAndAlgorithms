@@ -240,9 +240,3 @@ class LinkedBinaryTree(BinaryTree):
         self._size -= 1
         node._parent = node                     # convention for deprecated node
         return node._value
-
-    
-tree = LinkedBinaryTree()
-root_position = tree._add_root('A')
-print(tree.root().value())
-
