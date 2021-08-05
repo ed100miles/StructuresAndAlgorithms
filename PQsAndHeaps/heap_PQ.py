@@ -1,22 +1,4 @@
 """
-
-
-
-
-
-
-TODO: Debug !!!!!!!!!!!!!!!
-
-
-
-
-
-
-
-
-
-
-
 Implementation of heap min-oriented priority queue using array based binary tree. 
 
 See ~Trees/array_binary_tree.py for a reminder on level numbering:
@@ -106,4 +88,16 @@ class HeapPriorityQueue(PriorityQueueBase):
         item = self._data.pop()             # and remove it
         self._downheap(0)                   # then reposition new root
         return (item._key, item._value)
+
+# q = HeapPriorityQueue()
+
+# q.add(5, 'A')
+# q.add(10, 'B')
+# q.add(7, 'C')
+
+# print(q.min())
+# print()
+
+# for _ in range(len(q)):
+#     print(q.remove_min())
 
