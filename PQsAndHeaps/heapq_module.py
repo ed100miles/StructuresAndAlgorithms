@@ -12,7 +12,7 @@ heap = []
 print("Heappush's:")
 
 for _ in range(10):
-    heapq.heappush(heap, random.randint(1,100))
+    heapq.heappush(heap, random.randint(1, 100))
 print(heap, end='\n\n')
 
 # Heappop: pop and return min element and reestablish heap-order property O(log n)
@@ -22,7 +22,7 @@ print(heapq.heappop(heap))
 print(heapq.heappop(heap), end='\n\n')
 
 # Heappushpop: push element and pop and return min. O(log n)
-# *if pushed element is smallest it's immediately popped and returned 
+# *if pushed element is smallest it's immediately popped and returned
 print("Heappushpop's:")
 
 print(heapq.heappushpop(heap, 100))
@@ -30,6 +30,13 @@ print(heap)
 print(heapq.heappushpop(heap, 0))
 print(heap, end='\n\n')
 
+# Heapreplace: like above, but pop happens before push, if smallest pushed it's not returned
+print("Heapreplace's:")
+
+print(heapq.heapreplace(heap, 100))
+print(heap)
+print(heapq.heapreplace(heap, 0))
+print(heap, end='\n\n')
 
 
 
@@ -38,4 +45,3 @@ print("Heapify:")
 unordered_list = [9, 5, 7, 6, 1, 2]
 heapq.heapify(unordered_list)
 print(unordered_list)
-

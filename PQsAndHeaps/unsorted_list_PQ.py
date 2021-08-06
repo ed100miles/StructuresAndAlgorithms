@@ -7,8 +7,7 @@ remove_min: 0(n)
 NOTE: Compare with sorted: trade off between O(n) .add() vs O(n) min.() and remove_min.()
 """
 
-from base_modules.positional_list import PositionalList
-import unittest
+from positional_list import PositionalList
 
 
 class PriorityQueueBase:
