@@ -1,4 +1,4 @@
-from UnsortedTableMap import MapBase, UnsortedTableMap
+from unsorted_table_map import MapBase, UnsortedTableMap
 from random import randrange
 
 
