@@ -97,7 +97,7 @@ class Graph:
 
     def insert_vertex(self, x=None):
         """Insert and return a new Vertex with element x."""
-        v = self._Vertex(x)
+        v = self.Vertex(x)
         self._outgoing[v] = {}
         if self.is_directed():
             self._incoming[v] = {}  # need distinct map for incoming edges
